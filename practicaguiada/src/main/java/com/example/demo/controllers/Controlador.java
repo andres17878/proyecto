@@ -7,14 +7,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.bean.*;
 import com.example.demo.repository.BaseDatos;
+import com.example.demo.repository.BaseDatos2;
 
 
 @Controller //Peticiones http
 @RequestMapping("")
 public class Controlador {
 	
-	BaseDatos bd = new BaseDatos();
+	//BaseDatos bd = new BaseDatos();
 	Usuario usuario;
+	BaseDatos2 bd = new BaseDatos2();
 	
 	@GetMapping("/")
 	public String iniciar(Model model) {
@@ -30,6 +32,8 @@ public class Controlador {
 			model.addAttribute("usuario", usuario);
 			this.usuario = usuario;
 			model.addAttribute("libros", libros);
+			model.addAttribute("boton", "Inserta Libro");
+			model.addAttribute("action", "/insertar");
 			return "consulta";
 		} else { 
 			return "login";
@@ -43,6 +47,8 @@ public class Controlador {
 		ArrayList<Libro> libros = bd.getLibros();
 		model.addAttribute("usuario", this.usuario);
 		model.addAttribute("libros", libros);
+		model.addAttribute("boton", "Inserta Libro");
+		model.addAttribute("action", "/insertar");
 		return "consulta";
 	}
 	
